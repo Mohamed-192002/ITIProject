@@ -37,5 +37,31 @@ namespace ITIProject.Controllers
             context.SaveChanges();
             return RedirectToAction(nameof(GetAll));
         }
+        public IActionResult Edit(int?id)
+        {
+            var Emp=context.Employees.SingleOrDefault(x => x.Id == id);
+            return View(Emp);
+        }
+        public IActionResult SaveEdit(Employee employee)
+        {
+            var oldEmp=context.Employees.SingleOrDefault(e=>e.Id== employee.Id);
+            oldEmp.Name= employee.Name;
+            oldEmp.Address= employee.Address;
+            oldEmp.Salary = employee.Salary;
+            oldEmp.Age = employee.Age;
+            oldEmp.Email = employee.Email;
+            oldEmp.Password= employee.Password;
+            oldEmp.Office_id = employee.Office_id;
+            context.SaveChanges();
+            return RedirectToAction(nameof(GetAll));
+        }
+        public IActionResult Delete(int? id)
+        {
+            var Emp= context.Employees.SingleOrDefault(e => e.Id ==id);
+            context.Employees.Remove(Emp);
+            context.SaveChanges();
+            return RedirectToAction(nameof(GetAll));
+
+        }
     }
 }
