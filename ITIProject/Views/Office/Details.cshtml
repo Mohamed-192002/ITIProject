@@ -1,0 +1,54 @@
+﻿@model ITIProject.Models.Office
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="card w-75">
+    <div class="card-body">
+        <p class="card-title">Office Name : @Model.Name</p>
+        <p class="card-title">Location : @Model.Location</p>
+        @if (Model.employees.Count==0)
+        {
+            <h6>This Office Not Contain Employees</h6>
+        }
+        else
+        {
+            <h6>For employees in this office : </h6>
+            @foreach (var item in Model.employees)
+            {
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Salary</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Age</td>
+                            <td>@item.Address</td>
+                            <td>@item.Email</td>
+                            <td>@item.Salary</td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        }
+        <a asp-action="Edit" asp-route-Id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="GetAll" class="btn btn-primary">Back to List</a>
+
+    </div>
+</div>
+
+
+@*    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id  }) |
+*@    
+</div>
